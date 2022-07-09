@@ -1,0 +1,59 @@
+﻿<ion-view view-title="Contestar encuesta" name="login-view" hide-nav-bar="true">
+    <ion-header-bar class="bar-stable">
+        <button class="button button-icon button-calm ion-navicon" ng-click="openMenuLeft()"></button>
+        <h1 class="title">Contestar encuestas</h1>
+    </ion-header-bar>
+    <ion-content class="has-header" padding="true" ng-app="myApp" cache-view="false">
+
+        <div class="container" id="cont	">
+            <div class="list list-inset">
+                <label class="item item-input">
+                    <div class=" item-image">
+                        <img src="src/img/bannerKioscoUPP2.jpg" />
+                    </div>
+                </label>
+
+                <label class="item item-input">
+                    <b>Encuestas disponibles</b>
+                </label>
+                <div class="row item">
+                    <div class="col" ng-hide="true">
+                        <label class="item item-input item-select">
+                            <span class="item-input">*Encuesta</span>
+                            <select id="SelectorEncuesta" ng-model="optionEncuesta.idEncuesta" ng-change="establecerPacientes()">
+                                <option ng-repeat="itemEncuesta in encuestas"
+                                        value="{{itemEncuesta.idEncuesta}}">
+                                    {{itemEncuesta.encuesta}}
+                                </option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="col">
+                        <label class="item item-input item-select">
+                            <span class="item-input">*Idioma</span>
+                            <select id="SelectorIdioma" ng-model="optionIdioma.idIdioma">
+                                <option ng-repeat="itemIdioma in idiomas"
+                                        value="{{itemIdioma.catIdiomaPK.idIdioma}}">
+                                    {{itemIdioma.idioma}}
+                                </option>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+                <label class="item item-input">
+                    <b>Listado de pacientes</b>
+                </label>
+                <div class="row item">
+                    <div class="col">
+                        <label class="item item-input">
+                            <input type="text" placeholder="*Expediente" ng-model="ui.numeroDeExpediente" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
+                        </label>
+                    </div>
+                </div>
+                <label class="item item-input">
+                    <button class="button button-block button-calm" ng-disabled="!optionEncuesta.idEncuesta ||!optionIdioma.idIdioma || !ui.numeroDeExpediente" ng-click="comenzarEncuesta()">Comenzar</button>
+                </label>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

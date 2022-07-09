@@ -1,0 +1,291 @@
+﻿<ion-view view-title="Configurar reportes" hide-nav-bar="true">
+    <ion-header-bar class="bar-stable">
+        <button class="button button-icon button-calm ion-navicon" ng-click="openMenuLeft()"></button>
+        <h1 class="title">Reportes</h1>
+    </ion-header-bar>
+    <ion-content class="has-header" padding="true" cache-view="false">
+        <div class="container" id="cont	">
+            <div class="container" id="cont	">
+                <div class="list list-inset">
+                    <label class="item item-input">
+                        <span class=" item-image">
+                            <img src="src/img/bannerKioscoUPP2.jpg" />
+                        </span>
+                    </label>
+                    <label class="item item-input">
+                        <b>FORMATO DE REECOLECCIÓN DE DATOS</b>
+                    </label>
+                    <div class="row item">
+                        <div class="col">
+                            <span class="item-input">TIPO DE UNIDAD: {{unidad.tipo}}</span>
+                        </div>
+                        <div class="col">
+                            <div class="col">
+                                <span class="item-input">FECHA ELABORACIÓN: {{date}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row item">
+                        <div class="col">
+                            <span class="item-input">INSTITUCIÓN: {{empresaDetalle.nombreUnidad}}</span>
+                        </div>
+                        <div class="col">
+                            <div class="col">
+                                <span class="item-input">AREA: {{area.area}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row item">
+                        <div class="col">
+                            <span class="item-input">NOMBRE DE LA UNIDAD: {{empresaDetalle.nombreUnidad}}</span>
+                        </div>
+                        <div class="col">
+                            <div class="col">
+                                <span class="item-input">LOCALIDAD: {{municipio.municipio}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row item">
+                        <div class="col">
+                            <span class="item-input">MUNICIPIO: {{municipio.municipio}}</span>
+                        </div>
+                    </div>
+                    <div class="row item">
+                        <div class="col">
+                            <label class="item item-input item-select">
+                                <span>Encuesta</span>
+                                <select id="SelectorEncuesta" ng-model="ui.encuestaSeleccionada" ng-change="establecerPacientes()">
+                                    <option ng-repeat="itemEncuesta in encuestas"
+                                            value="{{itemEncuesta.idEncuesta}}">
+                                        {{itemEncuesta.encuesta}}
+                                    </option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row item">
+                        <div class="col">
+                            <span>Fecha Inicio: </span><input type="text" id="datepicker">
+                        </div>
+                        <div class="col">
+                            <span>Fecha Fin: </span><input type="text" id="datepicker2">
+                        </div>
+                    </div>
+                    <label class="item item-input" ng-hide="ocultarBoton">
+                        <button class="button button-block button-calm" ng-click="generarReportes()" ng-disabled="!ui.encuestaSeleccionada">GENERAR REPORTE</button>
+                    </label>
+                    <div class="row item"  ng-hide="!ocultarBoton">
+                        <div class="col-4">
+                            <div>
+                                <span>1. Concentrado automático</span>
+                            </div>
+                            <div class="row item">
+                                <table class="demo">
+                                    <thead>
+                                        <tr>
+                                            <th>P/R</th>
+                                            <th>a</th>
+                                            <th>b</th>
+                                            <th>c</th>
+                                            <th>d</th>
+                                            <th>e</th>
+                                            <th>f</th>
+                                            <th>N</th>
+                                            <th>%a</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in primerConcentrado" style="background-color:white">
+                                            <td>{{item.idPreguntaUsuario}}</td>
+                                            <td>{{item.conteoDeA}}</td>
+                                            <td>{{item.conteoDeB}}</td>
+                                            <td>{{item.conteoDeC}}</td>
+                                            <td>{{item.conteoDeD}}</td>
+                                            <td>{{item.conteoDeE}}</td>
+                                            <td>{{item.conteoDeF}}</td>
+                                            <td>{{item.conteoTotal}}</td>
+                                            <td>{{item.PorcentajeDeA}}</td>
+                                        </tr>
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="row item">
+                                <table class="demo">
+                                    <thead>
+                                        <tr>
+                                            <th>P/R</th>
+                                            <th>a</th>
+                                            <th>b</th>
+                                            <th>c</th>
+                                            <th>d</th>
+                                            <th>e</th>
+                                            <th>f</th>
+                                            <th>N</th>
+                                            <th>%a</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in segundoConcentrado" style="background-color:white">
+                                            <td>{{item.idPreguntaUsuario}}</td>
+                                            <td>{{item.conteoDeA}}</td>
+                                            <td>{{item.conteoDeB}}</td>
+                                            <td>{{item.conteoDeC}}</td>
+                                            <td>{{item.conteoDeD}}</td>
+                                            <td>{{item.conteoDeE}}</td>
+                                            <td>{{item.conteoDeF}}</td>
+                                            <td>{{item.conteoTotal}}</td>
+                                            <td>{{item.PorcentajeDeA}}</td>
+                                        </tr>
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            </div>
+                            <div class="col">
+                                <div id="chartdiv" style="width: 550px; height: 100%"></div>
+                            </div>
+                        </div>
+                    <div class="row item" ng-hide="!ocultarBoton">
+                        <div class="col">
+                           
+                            
+                            <span>3. Areas de mal trato (pregunta 10) </span>
+
+
+                            <table class="demo">
+                                <thead>
+                                    <tr>
+                                        <th>Area</th>
+                                        <th>Total</th>
+                                        <th>N(p10)</th>
+                                        <th>%</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="background-color:white">
+                                        <td>Recepcion</td>
+                                        <td>{{malTrato.conteoDeA}}</td>
+                                        <td>{{malTrato.conteoTotal}}</td>
+                                        <td>{{malTrato.PorcentajeDeA}}</td>
+                                    </tr>
+                                    <tr style="background-color:white">
+                                        <td>Archivo Clinico</td>
+                                        <td>{{malTrato.conteoDeB}}</td>
+                                        <td>{{malTrato.conteoTotal}}</td>
+                                        <td>{{malTrato.PorcentajeDeB}}</td>
+                                    </tr>
+                                    <tr style="background-color:white">
+                                        <td>Vigencia de derechos</td>
+                                        <td>{{malTrato.conteoDeC}}</td>
+                                        <td>{{malTrato.conteoTotal}}</td>
+                                        <td>{{malTrato.PorcentajeDeC}}</td>
+                                    </tr>
+                                    <tr style="background-color:white">
+                                        <td>Area Médica</td>
+                                        <td>{{malTrato.conteoDeD}}</td>
+                                        <td>{{malTrato.conteoTotal}}</td>
+                                        <td>{{malTrato.PorcentajeDeD}}</td>
+                                    </tr>
+                                    <tr style="background-color:white">
+                                        <td>Enfermería</td>
+                                        <td>{{malTrato.conteoDeE}}</td>
+                                        <td>{{malTrato.conteoTotal}}</td>
+                                        <td>{{malTrato.PorcentajeDeE}}</td>
+                                    </tr>
+                                    <tr style="background-color:white">
+                                        <td>Trabajo Social</td>
+                                        <td>{{malTrato.conteoDeF}}</td>
+                                        <td>{{malTrato.conteoTotal}}</td>
+                                        <td>{{malTrato.PorcentajeDeF}}</td>
+                                    </tr>
+                                    <tr style="background-color:white">
+                                        <td>Laboratorio</td>
+                                        <td>{{malTrato.conteoDeG}}</td>
+                                        <td>{{malTrato.conteoTotal}}</td>
+                                        <td>{{malTrato.PorcentajeDeG}}</td>
+                                    </tr>
+                                    <tr style="background-color:white">
+                                        <td>Rayos X</td>
+                                        <td>{{malTrato.conteoDeH}}</td>
+                                        <td>{{malTrato.conteoTotal}}</td>
+                                        <td>{{malTrato.PorcentajeDeH}}</td>
+                                    </tr>
+                                    <tr style="background-color:white">
+                                        <td>Farmacia</td>
+                                        <td>{{malTrato.conteoDeI}}</td>
+                                        <td>{{malTrato.conteoTotal}}</td>
+                                        <td>{{malTrato.PorcentajeDeI}}</td>
+                                    </tr>
+                                    <tr style="background-color:white">
+                                        <td>Caja</td>
+                                        <td>{{malTrato.conteoDeJ}}</td>
+                                        <td>{{malTrato.conteoTotal}}</td>
+                                        <td>{{malTrato.PorcentajeDeJ}}</td>
+                                    </tr>
+                                    <tr style="background-color:white">
+                                        <td>Vigilancia</td>
+                                        <td>{{malTrato.conteoDeK}}</td>
+                                        <td>{{malTrato.conteoTotal}}</td>
+                                        <td>{{malTrato.PorcentajeDeK}}</td>
+                                    </tr>
+                                    <tr style="background-color:white">
+                                        <td>Modulo de incapacidades</td>
+                                        <td>{{malTrato.conteoDeL}}</td>
+                                        <td>{{malTrato.conteoTotal}}</td>
+                                        <td>{{malTrato.PorcentajeDeL}}</td>
+                                    </tr>
+                                    <tr style="background-color:white">
+                                        <td>Ninguna de las anteriores</td>
+                                        <td>{{malTrato.conteoDeM}}</td>
+                                        <td>{{malTrato.conteoTotal}}</td>
+                                        <td>{{malTrato.PorcentajeDeM}}</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col">
+                            <span>4. Oportunidades de mejora </span>
+                            <br />
+                            <p>1 ___________________________________________________</p>
+                            <p>2 ___________________________________________________</p>
+                            <p>3 ___________________________________________________</p>
+                            <br />
+                            <br />
+                            <p>___________________________________________________</p>
+                            <p>Nombre y firma del responsable de la unidad</p>
+                            <br />
+                            <br />
+                            <p>___________________________________________________</p>
+                            <p>Nombre y firma del aval ciudadano</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </ion-content>
+</ion-view>
+<style>
+    .demo {
+        border: 1px solid #C0C0C0;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+
+        .demo th {
+            border: 1px solid #C0C0C0;
+            padding: 5px;
+            background: #F0F0F0;
+        }
+
+        .demo td {
+            border: 1px solid #C0C0C0;
+            padding: 5px;
+        }
+</style>

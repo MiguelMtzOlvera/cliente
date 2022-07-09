@@ -1,0 +1,39 @@
+<ion-view view-title="Crear encuestas" name="login-view" hide-nav-bar="true">
+    <ion-header-bar class="bar-stable">
+        <button class="button button-icon button-calm ion-navicon" ng-click="openMenuLeft()"></button>
+        <h1 class="title">Crear encuestas</h1>
+    </ion-header-bar>
+    <ion-content class="has-header" padding="true" ng-app="myApp" cache-view="false">
+
+        <div class="container" id="cont	">
+            <div class="list list-inset">
+                <label class="item item-input">
+                    <div class=" item-image">
+                        <img src="src/img/bannerKioscoUPP2.jpg" />
+                    </div>
+                </label>
+                <label class="item item-input item-select">
+                    <span class="item-input">*Empresa</span>
+                    <select ng-model="optionEmpresa.empresaSeleccionada" ng-change="establecerSubEmpresas()">
+                        <option ng-repeat="itemEmpresa in empresas" value="{{itemEmpresa}}"> {{itemEmpresa.empresa}}</option>
+                    </select>
+                </label>
+                <label class="item item-input item-select">
+                    <span class="item-input">*SubEmpresa</span>
+                    <select ng-model="nuevaEncuesta.idEmpresaDetalle">
+                        <option ng-repeat="itemEmpresaDetalle in empresasDetalles.catEmpresaDetalle"
+                                value="{{itemEmpresaDetalle.catEmpresaDetallePK.idEmpresaDetalle}}">
+                            {{itemEmpresaDetalle.nombreUnidad}}
+                        </option>
+                    </select>
+                </label>
+                <label class="item item-input">
+                    <input type="text" placeholder="*Nombre de la encuesta" ng-model="nuevaEncuesta.encuesta">
+                </label>
+                <label class="item item-input">
+                    <button class="button button-block button-calm" ng-click="CrearEncuesta()">Crear encuesta</button>
+                </label>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,118 @@
+﻿<ion-view view-title="Configurar respuestas" name="agregarrespuestas-tab" hide-nav-bar="true">
+    <ion-header-bar class="bar-stable">
+        <button class="button button-icon button-calm ion-navicon" ng-click="openMenuLeft()"></button>
+        <h1 class="title">Configurar respuestas</h1>
+    </ion-header-bar>
+    <ion-content class="has-header" padding="true" cache-view="false">
+        <div class="container" id="cont	">
+            <div class="container" id="cont	">
+                <div class="list list-inset">
+                    <label class="item item-input">
+                        <span class=" item-image">
+                            <img src="src/img/bannerKioscoUPP2.jpg" />
+                        </span>
+                    </label>
+                    <label class="item item-input">
+                        <b>Busqueda de encuesta</b>
+                    </label>
+                    <div class="row item">
+                        <div class="col">
+                            <label class="item item-input item-select">
+                                <span class="item-input">*Empresa:</span>
+                                <select ng-model="optionEmpresa.empresaSeleccionada" ng-change="establecerSubEmpresas()">
+                                    <option ng-repeat="itemEmpresa in empresas" value="{{itemEmpresa}}"> {{itemEmpresa.empresa}}</option>
+                                </select>
+                            </label>
+                        </div>
+                        <div class="col">
+                            <label class="item item-input item-select">
+                                <span class="item-input">*SubEmpresa</span>
+                                <select ng-model="optionSubEmpresa.idEmpresaDetalle" ng-change="establecerEncuestas()">
+                                    <option ng-repeat="itemEmpresaDetalle in empresasDetalles.catEmpresaDetalle"
+                                            value="{{itemEmpresaDetalle.catEmpresaDetallePK.idEmpresaDetalle}}">
+                                        {{itemEmpresaDetalle.nombreUnidad}}
+                                    </option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row item">
+                        <div class="col">
+                            <label class="item item-input item-select">
+                                <span class="item-input">*Encuesta</span>
+                                <select ng-model="optionEncuesta.idEncuesta">
+                                    <option ng-repeat="itemEncuesta in encuestas"
+                                            value="{{itemEncuesta.idEncuesta}}">
+                                        {{itemEncuesta.encuesta}}
+                                    </option>
+                                </select>
+                            </label>
+                        </div>
+                        <div class="col">
+                            <label class="item item-input item-select">
+                                <span class="item-input">*Idioma</span>
+                                <select ng-model="optionIdioma.idIdioma">
+                                    <option ng-repeat="itemIdioma in idiomas"
+                                            value="{{itemIdioma.catIdiomaPK.idIdioma}}">
+                                        {{itemIdioma.idioma}}
+                                    </option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row item">
+                        <div class="col">
+                            <label class="item item-input">
+                                <button class="button button-block button-calm" ng-click="establecerPreguntas()">Cargar Preguntas</button>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row item">
+                        <div class="col">
+                            <label class="item item-input item-select">
+                                <span class="item-input">*Pregunta</span>
+                                <select ng-model="optionPregunta.idPregunta">
+                                    <option ng-repeat="itemPregunta in preguntas"
+                                            value="{{itemPregunta.idPregunta}}">
+                                        {{itemPregunta.pregunta}}
+                                    </option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row item">
+                        <div class="col">
+                            <label class="item item-input">
+                                <button class="button button-block button-calm" ng-disabled="!preguntas" ng-click="establecerCombos()">Cargar respuestas</button>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="item item-input" align="center">
+                        <b>Respuestas</b>
+                    </div>
+
+                    <div style="max-height: 300px; height: auto; overflow: scroll;">
+                        <label class="item item-input" ng-repeat="itemCombo in combos">
+                            <input type="text" ng-model="itemCombo.combo" />
+                        </label>
+                    </div>
+                    <div class="row item">
+                        <div class="col">
+                            <label class="item item-input">
+                                <button class="button button-block button-calm" ng-disabled="!habilitaBoton" ng-click="agregarCombos()">Agregar combo</button>
+                            </label>
+                        </div>
+                        <div class="col">
+                            <label class="item item-input">
+                                <button class="button button-block button-calm" ng-disabled="!habilitaBoton" ng-click="guardarCambios()">Guardar cambios</button>
+                            </label>
+                        </div>
+                    </div>
+                    <label class="item item-input">
+                        <button class="button button-block button-calm" ng-disabled="!habilitaBoton" ng-click="recargar()">Volver a empezar</button>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,46 @@
+﻿<ion-view view-title="Contestar encuesta" name="login-view" hide-nav-bar="true">
+    <ion-header-bar class="bar-stable">
+        <button class="button button-icon button-calm ion-navicon" ng-click="openMenuLeft()"></button>
+        <h1 class="title">Contestar encuestas</h1>
+    </ion-header-bar>
+    <ion-content class="has-header" padding="true" ng-app="myApp" cache-view="false">
+
+        <div class="container" id="cont" name="contenedor">
+            <div class="list list-inset">
+                <label class="item item-input">
+
+                    <div class=" item-image">
+                        <img src="src/img/bannerKioscoUPP2.jpg" />
+                    </div>
+
+                </label>
+                <div class="row" ng-repeat="itemPregunta in preguntas">
+                    <div class="col" style="background-color: #D8F3DC">
+                        <span style="font-size: 25px; font-weight: bold;">{{itemPregunta.pregunta}}</span>
+                        <audio id="pregunta_{{itemPregunta.idPregunta}}_0" ng-src="{{getIframeSrc(itemPregunta.nombreAudio)}}"></audio>
+                        <input type="image" id="boton_play_pause" src="src/img/high-volumen.png" name="button" ng-click="playPause(itemPregunta.idPregunta,0)" align="right" style="width:3%; height:" />
+                        <div class="row" ng-repeat="itemCombo in itemPregunta.combos" style="background-color: #D8F3DC">
+                            <div class="col">
+                                <fieldset id="{{itemPregunta.idPregunta}}">
+                                    
+                                    <input type="radio" name="{{itemCombo.idPregunta}}" value="{{itemCombo.idCombo}}" style="font-size: 22px; float:left; border: 5px solid #3cf703 ; font-style: italic " />
+                                    <span class="container" style="font-size: 23px; float:left; font-style: italic;  margin-right: 15px; line-height: 32px; cursor:no-drop; user-select:none;">{{itemCombo.combo}}</span>
+                                    
+                                    <audio id="pregunta_{{itemPregunta.idPregunta}}_{{itemCombo.idCombo}}" ng-src="{{getIframeSrc(itemCombo.nombreAudio)}}"></audio>
+                                    <input type="image" id="boton_play_pause_combo" src="src/img/high-volumen.png" name="button" ng-click="playPause(itemPregunta.idPregunta,itemCombo.idCombo)" align="left" style="width:3%; height:" />
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              
+
+                <input type="button"  style="font-size: 20px; width: 55%;  height: 85px; left: 50%; top: 50%;"  value="Enviar" ng-click="getRadioButtonSelectedValue()">
+                
+
+            </div>
+
+        </div>
+
+    </ion-content>
+</ion-view>
